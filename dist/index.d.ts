@@ -19,6 +19,7 @@ export declare class GridFSRepository {
     protected dataSource: juggler.DataSource;
     protected bucket: GridFSBucket;
     constructor(bucketName: string, dataSource: juggler.DataSource);
+    private getBucket;
     upload(fileBuffer: Buffer, filename: string): Promise<GridFSFile>;
     uploadIgnoreDuplicate(fileBuffer: Buffer, filename: string): Promise<GridFSFile | undefined>;
     download(filename: string): Promise<Buffer>;

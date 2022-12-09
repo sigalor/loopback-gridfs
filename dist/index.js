@@ -10,13 +10,18 @@ class GridFSRepository {
         if (!this.dataSource.connector) {
             throw new Error('No connector');
         }
-        this.bucket = new mongodb_1.GridFSBucket(this.dataSource.connector.db, {
-            bucketName: this.bucketName,
-        });
+    }
+    getBucket() {
+        if (!this.bucket) {
+            this.bucket = new mongodb_1.GridFSBucket(this.dataSource.connector.db, {
+                bucketName: this.bucketName,
+            });
+        }
+        return this.bucket;
     }
     async upload(fileBuffer, filename) {
         return new Promise((resolve, reject) => {
-            const fileDataStream = stream_1.Readable.from(fileBuffer).pipe(this.bucket.openUploadStream(filename));
+            const fileDataStream = stream_1.Readable.from(fileBuffer).pipe(this.getBucket().openUploadStream(filename));
             fileDataStream.on('finish', resolve);
             fileDataStream.on('error', reject);
         });
@@ -29,7 +34,7 @@ class GridFSRepository {
     async download(filename) {
         return new Promise((resolve, reject) => {
             const data = [];
-            const stream = this.bucket.openDownloadStreamByName(filename);
+            const stream = this.getBucket().openDownloadStreamByName(filename);
             stream.on('data', (chunk) => data.push(chunk));
             stream.on('end', () => resolve(Buffer.concat(data)));
             stream.on('error', reject);
@@ -37,7 +42,7 @@ class GridFSRepository {
     }
     async exists(filename) {
         return new Promise((resolve, reject) => {
-            const stream = this.bucket.openDownloadStreamByName(filename);
+            const stream = this.getBucket().openDownloadStreamByName(filename);
             stream.on('data', () => {
                 resolve(true);
                 stream.destroy();
