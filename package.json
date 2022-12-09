@@ -1,0 +1,35 @@
+{
+  "name": "loopback-connector-gridfs",
+  "version": "1.0.0",
+  "description": "Loopback 4 connector for MongoDB GridFS storage",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sigalor/loopback-connector-gridfs.git"
+  },
+  "keywords": [
+    "loopback",
+    "mongodb",
+    "mongo",
+    "gridfs",
+    "storage",
+    "GridFSBucket"
+  ],
+  "homepage": "https://github.com/sigalor/loopback-connector-gridfs#readme",
+  "bugs": "https://github.com/sigalor/loopback-connector-gridfs/issues",
+  "scripts": {},
+  "author": "sigalor",
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Julian Nalenz",
+      "email": "nalenz@protonmail.com",
+      "url": "https://github.com/sigalor"
+    }
+  ],
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "loopback-connector-mongodb": "^7.0.0-alpha.1",
+    "mongodb": "^4.12.1"
+  }
+}
