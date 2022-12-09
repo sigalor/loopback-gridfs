@@ -21,6 +21,11 @@ class GridFSRepository {
             fileDataStream.on('error', reject);
         });
     }
+    async uploadIgnoreDuplicate(fileBuffer, filename) {
+        if (await this.exists(filename))
+            return;
+        return this.upload(fileBuffer, filename);
+    }
     async download(filename) {
         return new Promise((resolve, reject) => {
             const data = [];

@@ -31,11 +31,12 @@ export class MyFilesRepository extends GridFSRepository {
 
 ### GridFSRepository
 
-| Method signature                                                          | Description                                                                   |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `async upload(fileBuffer: Buffer, filename: string): Promise<GridFSFile>` | Uploads the specified buffer to the bucket using the specified filename.      |
-| `async download(filename: string): Promise<Buffer>`                       | Downloads a file using its filename.                                          |
-| `async exists(filename: string): Promise<boolean>`                        | Returns a boolean indicating whether any file with the specified name exists. |
+| Method signature                                                                                      | Description                                                                                                          |
+| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `async upload(fileBuffer: Buffer, filename: string): Promise<GridFSFile>`                             | Uploads the specified buffer to the bucket using the specified filename and returns details about the uploaded file. |
+| `async uploadIgnoreDuplicate(fileBuffer: Buffer, filename: string): Promise<GridFSFile \| undefined>` | Same as `upload`, but does nothing and returns `undefined` if any file with the given name already exists.           |
+| `async download(filename: string): Promise<Buffer>`                                                   | Downloads a file using its filename.                                                                                 |
+| `async exists(filename: string): Promise<boolean>`                                                    | Returns a boolean indicating whether any file with the specified name exists.                                        |
 
 ### GridFSFile
 

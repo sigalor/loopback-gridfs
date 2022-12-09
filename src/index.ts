@@ -41,6 +41,11 @@ export class GridFSRepository {
     });
   }
 
+  async uploadIgnoreDuplicate(fileBuffer: Buffer, filename: string): Promise<GridFSFile | undefined> {
+    if (await this.exists(filename)) return;
+    return this.upload(fileBuffer, filename);
+  }
+
   async download(filename: string): Promise<Buffer> {
     return new Promise((resolve, reject) => {
       const data: Buffer[] = [];
