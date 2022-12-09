@@ -14,7 +14,7 @@ npm install loopback-gridfs
 
 ## Usage
 
-Simply create a new LoopBack 4 repository which inherits from `GridFSRepository`. The first parameter to `super` in the constructor is the bucket name. The following code would go into `src/repositories/document-contents.repository.ts` and that repository can then be injected into LoopBack 4 controllers, services etc. like any other.
+Simply create a new LoopBack 4 repository which inherits from `GridFSRepository`. The first parameter to `super` in the constructor is the bucket name, the second one is your existing Mongo data source. The following code would go into `src/repositories/document-contents.repository.ts` and that repository can then be injected into LoopBack 4 controllers, services etc. like any other.
 
 ```typescript
 import { juggler } from '@loopback/repository';
