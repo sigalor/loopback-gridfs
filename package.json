@@ -1,11 +1,11 @@
 {
-  "name": "loopback-connector-gridfs",
+  "name": "loopback-gridfs",
   "version": "1.0.0",
-  "description": "Loopback 4 connector for MongoDB GridFS storage",
-  "main": "index.js",
+  "description": "Library for LoopBack 4 to access MongoDB GridFS via repositories.",
+  "main": "./dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sigalor/loopback-connector-gridfs.git"
+    "url": "git+https://github.com/sigalor/loopback-gridfs.git"
   },
   "keywords": [
     "loopback",
@@ -15,20 +15,20 @@
     "storage",
     "GridFSBucket"
   ],
-  "homepage": "https://github.com/sigalor/loopback-connector-gridfs#readme",
-  "bugs": "https://github.com/sigalor/loopback-connector-gridfs/issues",
-  "scripts": {},
+  "homepage": "https://github.com/sigalor/loopback-gridfs#readme",
+  "bugs": "https://github.com/sigalor/loopback-gridfs/issues",
+  "scripts": {
+    "prebuild": "rimraf dist tsconfig.tsbuildinfo",
+    "build": "lb-tsc"
+  },
   "author": "sigalor",
   "license": "MIT",
-  "contributors": [
-    {
-      "name": "Julian Nalenz",
-      "email": "nalenz@protonmail.com",
-      "url": "https://github.com/sigalor"
-    }
-  ],
   "dependencies": {
-    "loopback-connector-mongodb": "^7.0.0-alpha.1",
+    "@loopback/repository": "^5.1.0",
     "mongodb": "^4.12.1"
+  },
+  "devDependencies": {
+    "@loopback/build": "^9.0.5",
+    "rimraf": "^3.0.2"
   }
 }

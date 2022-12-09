@@ -1,19 +1,60 @@
-# loopback-connector-gridfs
+# loopback-gridfs
 
-Uses MongoDB's [GridFS](https://www.mongodb.com/docs/manual/core/gridfs/) to manage binary contents of your LoopBack application.
+[![GitHub license](https://img.shields.io/github/license/sigalor/loopback-gridfs)](https://github.com/sigalor/loopback-gridfs/blob/main/LICENSE) [![npm](https://img.shields.io/npm/v/loopback-gridfs)](https://www.npmjs.com/package/loopback-gridfs)
+
+Uses MongoDB's [GridFS](https://www.mongodb.com/docs/manual/core/gridfs/) to manage binary contents of your LoopBack 4 application. Full TypeScript support. Works simply with Node.js `Buffer` objects.
 
 ## Installation
 
-Add the loopback-connector-gridfs dependency to your project using yarn or npm.
+Add the loopback-gridfs dependency to your project:
 
 ```bash
-npm install loopback-connector-gridfs
+npm install loopback-gridfs
 ```
 
-### Add Datasource
+## Usage
 
-TODO
+Simply create a new LoopBack 4 repository which inherits from `GridFSRepository`. The first parameter to `super` in the constructor is the bucket name. The following code would go into `src/repositories/document-contents.repository.ts` and that repository can then be injected into LoopBack 4 controllers, services etc. like any other.
 
-## Licence
+```typescript
+import { juggler } from '@loopback/repository';
+import { GridFSRepository } from 'loopback-gridfs';
+
+export class MyFilesRepository extends GridFSRepository {
+  constructor(@inject('datasources.mongo') dataSource: juggler.DataSource) {
+    super('MyFiles', dataSource);
+  }
+}
+```
+
+## Reference
+
+### GridFSRepository
+
+| Method signature                                                          | Description                                                                   |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `async upload(fileBuffer: Buffer, filename: string): Promise<GridFSFile>` | Uploads the specified buffer to the bucket using the specified filename.      |
+| `async download(filename: string): Promise<Buffer>`                       | Downloads a file using its filename.                                          |
+| `async exists(filename: string): Promise<boolean>`                        | Returns a boolean indicating whether any file with the specified name exists. |
+
+### GridFSFile
+
+```typescript
+interface GridFSFile {
+  _id: ObjectId;
+  length: number;
+  chunkSize: number;
+  uploadDate: Date;
+  filename: string;
+  md5?: string;
+  metadata?: {
+    container: string;
+    mimetype: string;
+    extension: string;
+  };
+}
+```
+
+## License
 
 MIT
