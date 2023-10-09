@@ -43,9 +43,16 @@ class GridFSRepository {
     async exists(filename) {
         return new Promise((resolve, reject) => {
             const stream = this.getBucket().openDownloadStreamByName(filename);
+            let isResolved = false;
             stream.on('data', () => {
-                resolve(true);
+                if (!isResolved)
+                    resolve(true);
                 stream.destroy();
+            });
+            stream.on('end', () => {
+                // only relevant when file is empty
+                if (!isResolved)
+                    resolve(true);
             });
             stream.on('error', (e) => {
                 if (e.code === 'ENOENT')
