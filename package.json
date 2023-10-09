@@ -1,6 +1,6 @@
 {
   "name": "loopback-gridfs",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Library for LoopBack 4 to access MongoDB GridFS via repositories.",
   "main": "./dist/index.js",
   "repository": {
